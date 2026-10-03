@@ -49,11 +49,17 @@ export const business = {
   schedule: { 0: null, 1: [9, 22], 2: [9, 22], 3: [9, 22], 4: [9, 22], 5: [9, 22], 6: [9, 22] },
 };
 
-/** Map URLs (no API key needed). */
+/**
+ * Map URLs (no API key needed). These use Google's official cross-platform
+ * "Maps URLs" format (…/?api=1), which opens the exact listing in the Google
+ * Maps app on Android/iPhone and in the browser on desktop. (The older
+ * "?q=place_id:" form shows "not found" inside the mobile apps.)
+ */
+const placeQuery = encodeURIComponent(`${business.fullName}, ${business.city}`);
 export const maps = {
   embed: `https://maps.google.com/maps?q=${business.geo.lat},${business.geo.lng}&z=16&output=embed`,
   directions: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(business.name)}&destination_place_id=${business.placeId}`,
-  listing: `https://www.google.com/maps/place/?q=place_id:${business.placeId}`,
+  listing: `https://www.google.com/maps/search/?api=1&query=${placeQuery}&query_place_id=${business.placeId}`,
   writeReview: `https://search.google.com/local/writereview?placeid=${business.placeId}`,
 };
 

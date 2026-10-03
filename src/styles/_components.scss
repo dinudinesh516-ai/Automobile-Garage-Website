@@ -26,7 +26,7 @@
 
   &.is-scrolled,
   &.is-open {
-    --smk-nav-h: 66px;
+    --smk-nav-h: 74px;
     background: rgba($ink-900, 0.72);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     backdrop-filter: blur(20px) saturate(160%);
@@ -35,12 +35,16 @@
 
   .navbar-brand {
     display: block;
-    height: 46px;
+    height: 60px;
     padding: 0;
     margin: 0;
     transition: height 0.5s var(--smk-ease);
   }
-  &.is-scrolled .navbar-brand { height: 40px; }
+  &.is-scrolled .navbar-brand { height: 52px; }
+  @include media-breakpoint-down(sm) {
+    .navbar-brand { height: 54px; }
+    &.is-scrolled .navbar-brand { height: 48px; }
+  }
 
   .nav-link {
     position: relative;
