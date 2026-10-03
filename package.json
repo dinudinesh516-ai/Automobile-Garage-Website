@@ -1,0 +1,25 @@
+{
+  "name": "smk-automobiles",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Premium multi-brand car service centre website for SMK Automobiles, Kanchipuram.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "sass": "^1.105.1",
+    "vite": "^8.3.2"
+  }
+}

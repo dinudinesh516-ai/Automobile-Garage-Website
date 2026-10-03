@@ -1,0 +1,276 @@
+// =============================================================================
+// Base: global typography, layout rhythm, shared utilities, motion
+// =============================================================================
+
+:root {
+  --smk-brand: #{$brand};
+  --smk-brand-soft: #{$brand-soft};
+  --smk-ink: #{$ink-900};
+  --smk-nav-h: 76px;
+  --smk-ease: #{$ease-luxe};
+  --smk-section-y: clamp(4.5rem, 9vw, 9rem);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--smk-nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+// Ultra-wide: widen the content column (kept out of $grid-breakpoints so
+// Bootstrap doesn't generate a whole extra tier of utility classes).
+@media (min-width: 1920px) {
+  .container-xl { max-width: 1680px; }
+}
+
+// 4K: scale the whole rem system so nothing looks tiny.
+@media (min-width: 2200px) {
+  html { font-size: 112.5%; }
+}
+@media (min-width: 3000px) {
+  html { font-size: 137.5%; }
+}
+
+body {
+  background: $ink-900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba($brand, 0.55);
+  color: #fff;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  font-stretch: 108%;
+}
+h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+// Accessible skip link
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 2000;
+  padding: 0.6rem 1rem;
+  background: $brand;
+  color: #fff;
+  border-radius: $border-radius-sm;
+  font-weight: 700;
+  &:focus { top: 1rem; }
+}
+
+// Section rhythm ---------------------------------------------------------------
+.section {
+  position: relative;
+  padding-block: var(--smk-section-y);
+}
+.section-alt {
+  background:
+    radial-gradient(60rem 30rem at 85% 0%, rgba($brand, 0.07), transparent 60%),
+    $ink-850;
+  border-block: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: $brand-bright;
+  &::before {
+    content: '';
+    width: 1.75rem;
+    height: 3px;
+    background: $brand;
+    // Angled end, echoing the card's chevrons
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  }
+}
+
+.section-title {
+  font-size: clamp(2.1rem, 1.3rem + 3vw, 4rem);
+  margin-block: 1rem 1.25rem;
+  em {
+    font-style: normal;
+    color: $brand;
+  }
+}
+
+.lead-muted {
+  color: $steel-400;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  max-width: 38rem;
+}
+
+.text-brand { color: $brand !important; }
+.text-pearl { color: $pearl !important; }
+.text-steel { color: $steel-400 !important; }
+
+// Glass surface — reusable
+.glass {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-radius: $border-radius-lg;
+}
+
+.brand-rule {
+  height: 1px;
+  border: 0;
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, rgba($brand, 0.7), transparent);
+}
+
+// Buttons ---------------------------------------------------------------------
+.btn {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    transform 0.35s var(--smk-ease),
+    box-shadow 0.35s var(--smk-ease),
+    background-color 0.25s,
+    color 0.25s,
+    border-color 0.25s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  &:active { transform: translateY(1px) scale(0.99); }
+}
+
+@include media-breakpoint-down(sm) {
+  .btn-lg { font-size: 0.82rem; padding-inline: 1.25rem; }
+}
+
+.btn-brand {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #{$brand};
+  --bs-btn-border-color: #{$brand};
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #{$brand-bright};
+  --bs-btn-hover-border-color: #{$brand-bright};
+  --bs-btn-active-bg: #{$brand-deep};
+  --bs-btn-active-border-color: #{$brand-deep};
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-bg: #{$brand};
+  --bs-btn-disabled-border-color: #{$brand};
+  --bs-btn-disabled-color: #fff;
+  box-shadow: 0 12px 30px -12px rgba($brand, 0.7);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -14px rgba($brand-bright, 0.8);
+  }
+}
+
+.btn-ghost {
+  --bs-btn-color: #{$pearl};
+  --bs-btn-border-color: rgba(255, 255, 255, 0.22);
+  --bs-btn-hover-color: #{$ink-950};
+  --bs-btn-hover-bg: #{$pearl};
+  --bs-btn-hover-border-color: #{$pearl};
+  --bs-btn-active-bg: #{$steel-200};
+  --bs-btn-active-color: #{$ink-950};
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.04);
+  &:hover { transform: translateY(-2px); }
+}
+
+.btn-whatsapp {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #1faa55;
+  --bs-btn-border-color: #1faa55;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #25d366;
+  --bs-btn-hover-border-color: #25d366;
+  --bs-btn-active-bg: #178a44;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-bg: #1faa55;
+  --bs-btn-disabled-border-color: #1faa55;
+  --bs-btn-disabled-color: #fff;
+  box-shadow: 0 12px 30px -12px rgba(#25d366, 0.6);
+  &:hover { transform: translateY(-2px); }
+}
+
+// Forms -----------------------------------------------------------------------
+.form-label {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.form-control,
+.form-select {
+  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s;
+}
+.form-select option { background: $ink-800; color: $pearl; }
+input[type='date'] { color-scheme: dark; }
+
+// Light sections (white, like the business card) --------------------------------
+// Flips text and surface colours for components placed inside them.
+.section-light {
+  background: $paper;
+  color: $paper-text;
+  border-block: 1px solid $paper-line;
+
+  .section-title,
+  h3,
+  h4 { color: $paper-strong; }
+  .lead-muted { color: $paper-text; }
+  .text-pearl { color: $paper-strong !important; }
+  .text-steel { color: $paper-text !important; }
+
+  .glass {
+    background: $paper-card;
+    border-color: $paper-line;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-ghost {
+    --bs-btn-color: #{$paper-strong};
+    --bs-btn-border-color: rgba(0, 0, 0, 0.18);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #{$paper-strong};
+    --bs-btn-hover-border-color: #{$paper-strong};
+    background-color: transparent;
+  }
+}
+
+// Scroll-reveal motion ------------------------------------------------------------
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--smk-ease),
+    transform 0.9s var(--smk-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}

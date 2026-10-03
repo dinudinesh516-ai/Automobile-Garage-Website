@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.vercel
+
+# Environment — never commit real API keys
+.env
+.env.local
+.env.*.local
+
+# Logs & OS / editor files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Local AI-assistant tooling
+.claude/

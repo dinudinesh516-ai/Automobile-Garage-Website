@@ -1,0 +1,924 @@
+// =============================================================================
+// Component styles — one block per React component
+// =============================================================================
+
+// Brand logo --------------------------------------------------------------------
+.brand-logo {
+  display: block;
+  height: 100%;
+  width: auto;
+  color: $pearl; // S + K colour on dark backgrounds
+  overflow: visible;
+}
+
+// Navbar ----------------------------------------------------------------------
+.smk-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1030;
+  height: var(--smk-nav-h);
+  padding: 0;
+  transition:
+    background-color 0.5s var(--smk-ease),
+    border-color 0.5s var(--smk-ease),
+    height 0.5s var(--smk-ease);
+  border-bottom: 1px solid transparent;
+
+  &.is-scrolled,
+  &.is-open {
+    --smk-nav-h: 66px;
+    background: rgba($ink-900, 0.72);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .navbar-brand {
+    display: block;
+    height: 46px;
+    padding: 0;
+    margin: 0;
+    transition: height 0.5s var(--smk-ease);
+  }
+  &.is-scrolled .navbar-brand { height: 40px; }
+
+  .nav-link {
+    position: relative;
+    color: $steel-200;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.9rem !important;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0.9rem;
+      right: 0.9rem;
+      bottom: 0.15rem;
+      height: 2px;
+      background: $brand;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.45s var(--smk-ease);
+    }
+    &:hover,
+    &.active {
+      color: $pearl;
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  .nav-cta { padding: 0.6rem 1.15rem; font-size: 0.72rem; }
+
+  // Burger
+  .burger {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: $border-radius;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: $pearl;
+      transition: transform 0.4s var(--smk-ease), opacity 0.3s;
+      & + span { margin-top: 4px; }
+    }
+    &[aria-expanded='true'] {
+      span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; }
+      span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    }
+  }
+
+  // Mobile drawer (React-controlled, so no Bootstrap JS needed)
+  @include media-breakpoint-down(lg) {
+    .nav-drawer {
+      position: fixed;
+      top: var(--smk-nav-h);
+      left: 0;
+      right: 0;
+      height: calc(100dvh - var(--smk-nav-h));
+      padding: 2rem 1.5rem;
+      // Solid: a backdrop-filter nested inside the blurred header won't render
+      background:
+        radial-gradient(30rem 20rem at 100% 0%, rgba($brand, 0.14), transparent 60%),
+        $ink-950;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.4s var(--smk-ease), transform 0.4s var(--smk-ease), visibility 0.4s;
+      overflow-y: auto;
+      &.show {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      .nav-link {
+        font-size: 1.9rem;
+        font-weight: 800;
+        text-transform: none;
+        letter-spacing: -0.01em;
+        padding: 0.35rem 0 !important;
+        &::after { display: none; }
+        &.active { color: $brand-bright; }
+      }
+    }
+  }
+}
+
+// Hero ------------------------------------------------------------------------
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--smk-nav-h) + 3rem) 5rem;
+  overflow: hidden;
+  isolation: isolate;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 60% 55%;
+      transform: scale(1.06);
+      animation: hero-zoom 18s var(--smk-ease) forwards;
+      filter: saturate(0.8) contrast(1.08) brightness(0.9);
+    }
+  }
+
+  // Gradient veil for legibility + red ambient glow
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(45rem 28rem at 8% 40%, rgba($brand, 0.16), transparent 60%),
+      linear-gradient(90deg, rgba($ink-950, 0.95) 0%, rgba($ink-950, 0.78) 40%, rgba($ink-950, 0.3) 72%, rgba($ink-950, 0.55) 100%),
+      linear-gradient(0deg, $ink-900 0%, transparent 30%);
+  }
+  @include media-breakpoint-down(md) {
+    &::before {
+      background: linear-gradient(180deg, rgba($ink-950, 0.6) 0%, rgba($ink-950, 0.82) 55%, $ink-900 100%);
+    }
+  }
+
+  // Red chevrons — lifted from the business card
+  &__chevrons {
+    position: absolute;
+    right: -2rem;
+    bottom: 12%;
+    z-index: -1;
+    display: flex;
+    gap: clamp(0.5rem, 1.5vw, 1.25rem);
+    opacity: 0.9;
+    span {
+      width: clamp(40px, 6vw, 96px);
+      height: clamp(80px, 12vw, 190px);
+      background: $brand;
+      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+      animation: chevron-in 1.2s var(--smk-ease) both;
+      &:nth-child(2) { animation-delay: 0.12s; opacity: 0.75; }
+      &:nth-child(3) { animation-delay: 0.24s; opacity: 0.5; }
+    }
+    @include media-breakpoint-down(md) { display: none; }
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 1.3rem + 5.6vw, 6.75rem);
+    font-weight: 900;
+    font-stretch: 112%;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin-block: 1.25rem 1.5rem;
+    em {
+      display: inline-block;
+      font-style: normal;
+      color: $brand;
+    }
+  }
+
+  &__lead {
+    color: $steel-200;
+    font-size: clamp(1rem, 0.92rem + 0.4vw, 1.2rem);
+    max-width: 36rem;
+  }
+
+  .rating-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 1rem 0.45rem 0.5rem;
+    border-radius: $border-radius-pill;
+    font-size: 0.8rem;
+    color: $steel-200;
+    .score {
+      background: $brand;
+      color: #fff;
+      font-weight: 800;
+      border-radius: $border-radius-pill;
+      padding: 0.15rem 0.6rem;
+    }
+    .stars { color: #fbbc04; }
+  }
+
+  &__stats {
+    margin-top: clamp(2.5rem, 6vw, 5rem);
+    .stat {
+      padding: 1.1rem 1.25rem;
+      height: 100%;
+      border-left: 3px solid $brand;
+      strong {
+        display: block;
+        font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
+        font-weight: 900;
+        font-stretch: 110%;
+        color: $pearl;
+        line-height: 1;
+        margin-bottom: 0.35rem;
+      }
+      span {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: $steel-400;
+      }
+    }
+  }
+
+  &__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    translate: -50% 0;
+    width: 2px;
+    height: 56px;
+    background: rgba($brand, 0.35);
+    overflow: hidden;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: $brand;
+      animation: scroll-cue 2.2s var(--smk-ease) infinite;
+    }
+  }
+}
+
+.open-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse-dot 2s infinite;
+  }
+  &.is-open { color: $success; }
+  &.is-closed { color: $danger; &::before { animation: none; } }
+}
+
+@keyframes hero-zoom { to { transform: scale(1); } }
+@keyframes chevron-in {
+  from { opacity: 0; transform: translateX(-30px); }
+}
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba($success, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba($success, 0); }
+  100% { box-shadow: 0 0 0 0 rgba($success, 0); }
+}
+
+// Brands marquee — red band, like the card's footer strip -------------------------
+.brand-strip {
+  position: relative;
+  background: $brand;
+  color: #fff;
+  overflow: hidden;
+  padding-block: 1.1rem;
+  .brand-strip__label {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    background: $ink-950;
+    padding: 1.6rem 2.25rem 1.6rem clamp(1rem, 3vw, 2.5rem);
+    margin-block: -1.1rem;
+    white-space: nowrap;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 50%, calc(100% - 1.5rem) 100%, 0 100%);
+  }
+  .brand-strip__viewport {
+    overflow: hidden;
+    min-width: 0;
+    // Soft fade at both edges so names glide in/out instead of being cut
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  }
+  .brand-strip__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 80s linear infinite; // ~2 list lengths per loop
+  }
+  // Pause on mouse hover only
+  &:hover .brand-strip__track { animation-play-state: paused; }
+
+  .brand-strip__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.5rem;
+    padding-right: 2.5rem;
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.35rem);
+    font-weight: 800;
+    font-stretch: 110%;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    &::after {
+      content: '';
+      width: 10px;
+      height: 14px;
+      background: rgba(#fff, 0.55);
+      clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+    }
+  }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+// "Reduce motion" is on by default on many Windows PCs. The global rule in
+// _base.scss would freeze the marquee and cut brands off, so keep it moving
+// slowly instead (it still pauses on hover).
+@media (prefers-reduced-motion: reduce) {
+  .brand-strip .brand-strip__track {
+    animation-duration: 150s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+// Services ----------------------------------------------------------------------
+.service-card {
+  position: relative;
+  height: 100%;
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  border-radius: $border-radius-lg;
+  background: $paper-card;
+  border: 1px solid $paper-line;
+  overflow: hidden;
+  transition:
+    transform 0.6s var(--smk-ease),
+    border-color 0.6s var(--smk-ease),
+    box-shadow 0.6s var(--smk-ease);
+
+  // Red bar that sweeps in along the bottom on hover
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: $brand;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--smk-ease);
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba($brand, 0.35);
+    box-shadow: 0 28px 50px -30px rgba($brand, 0.45);
+    &::after { transform: scaleX(1); }
+    .service-icon {
+      background: $brand;
+      color: #fff;
+      transform: rotate(-6deg) scale(1.05);
+    }
+    .service-cta { color: $brand; }
+  }
+
+  .service-index {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: rgba($paper-strong, 0.18);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-stretch: 100%;
+    letter-spacing: -0.01em;
+    margin: 1.5rem 0 0.6rem;
+    color: $paper-strong;
+  }
+  p {
+    color: $paper-text;
+    font-size: 0.92rem;
+    margin: 0 0 1rem;
+    line-height: 1.65;
+  }
+  .service-cta {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba($paper-strong, 0.45);
+    transition: color 0.3s;
+  }
+}
+
+.service-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: $border-radius;
+  color: $brand;
+  background: $brand-soft;
+  transition: all 0.5s var(--smk-ease);
+}
+
+// About -------------------------------------------------------------------------
+.about-visual {
+  position: relative;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba($ink-950, 0.85));
+  }
+  // Red corner chevron accent
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 90px;
+    height: 90px;
+    background: $brand;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+  }
+  .about-badge {
+    position: absolute;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 1;
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.pillar {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  .pillar-num {
+    color: $brand;
+    font-size: 1.1rem;
+    font-weight: 900;
+    line-height: 1.5;
+    min-width: 2rem;
+  }
+  h4 { font-size: 1rem; margin-bottom: 0.25rem; color: $pearl; }
+  p { margin: 0; color: $steel-400; font-size: 0.92rem; }
+}
+
+// Gallery -----------------------------------------------------------------------
+.gallery-grid {
+  display: grid;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  grid-template-columns: 1fr;
+  grid-auto-rows: clamp(200px, 55vw, 260px);
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(180px, 28vw, 260px);
+    .is-feature { grid-column: span 2; }
+  }
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(200px, 20vw, 360px);
+    .is-feature { grid-column: span 2; grid-row: span 2; }
+  }
+}
+
+.gallery-item {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: $border-radius-lg;
+  background: $ink-800;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--smk-ease), filter 0.8s;
+    filter: brightness(0.88);
+  }
+  figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(transparent, rgba($ink-950, 0.88));
+    color: $pearl;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    &::before {
+      content: '';
+      width: 1.25rem;
+      height: 3px;
+      background: $brand;
+      transition: width 0.6s var(--smk-ease);
+    }
+  }
+  &:hover {
+    img { transform: scale(1.06); filter: none; }
+    figcaption::before { width: 2.5rem; }
+  }
+}
+
+// Reviews -----------------------------------------------------------------------
+.rating-summary {
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  height: 100%;
+  .big {
+    font-size: clamp(4rem, 3rem + 4vw, 6.5rem);
+    font-weight: 900;
+    font-stretch: 110%;
+    line-height: 0.9;
+    color: $paper-strong;
+  }
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #fbbc04; // Google star yellow
+}
+
+.google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $paper-text;
+}
+
+.review-card {
+  position: relative;
+  height: 100%;
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  transition: transform 0.6s var(--smk-ease), border-color 0.6s;
+  &:hover { transform: translateY(-4px); border-color: rgba($brand, 0.35) !important; }
+  blockquote {
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+    line-height: 1.6;
+    color: $paper-strong;
+    margin: 1rem 0 1.25rem;
+    // Long Google reviews are clamped to keep cards even
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  &.is-featured blockquote {
+    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+    font-weight: 600;
+    -webkit-line-clamp: 4;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    img, .avatar {
+      width: 40px;
+      height: 40px;
+      flex: none;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .avatar {
+      display: grid;
+      place-items: center;
+      background: $brand;
+      color: #fff;
+      font-weight: 800;
+    }
+    strong {
+      display: block;
+      color: $paper-strong;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    > div { min-width: 0; }
+    small { display: block; color: $paper-text; font-size: 0.75rem; }
+  }
+}
+
+// Skeleton shimmer while live reviews load
+.skeleton {
+  border-radius: $border-radius-sm;
+  background: linear-gradient(90deg, $paper-line 0%, lighten($paper-line, 5%) 50%, $paper-line 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+// Contact / Booking --------------------------------------------------------------
+.booking-card {
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.info-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  &:last-child { border-bottom: 0; }
+  .ico {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: $border-radius;
+    background: $brand-soft;
+    color: $brand-bright;
+  }
+  .lbl {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: $steel-400;
+  }
+  a, .val { color: $pearl; font-weight: 600; }
+  a:hover { color: $brand-bright; }
+}
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  display: grid;
+  gap: 0.35rem;
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.92rem;
+    span { color: $steel-400; }
+  }
+}
+
+.hours-table {
+  width: 100%;
+  font-size: 0.9rem;
+  td { padding: 0.2rem 0; }
+  td:last-child { text-align: right; color: $pearl; }
+  tr.is-today td { color: $brand-bright; font-weight: 700; }
+}
+
+.map-frame {
+  position: relative;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  height: 320px;
+  background: $ink-800;
+  @include media-breakpoint-up(md) { height: auto; aspect-ratio: 21 / 9; }
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    // Dark-mode the map tiles to match the theme
+    filter: grayscale(1) invert(0.92) contrast(0.9) brightness(0.95);
+  }
+  .map-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background:
+      radial-gradient(circle at center, rgba($brand, 0.1), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 40px);
+  }
+}
+
+// Footer ------------------------------------------------------------------------
+.site-footer {
+  position: relative;
+  padding-block: 4rem 2rem;
+  background: $ink-950;
+  border-top: 4px solid $brand;
+  font-size: 0.9rem;
+  color: $steel-400;
+  overflow: hidden;
+  h5 {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $pearl;
+    margin-bottom: 1.25rem;
+  }
+  a { color: $steel-400; &:hover { color: $brand-bright; } }
+  .footer-logo { height: 64px; margin-bottom: 1.25rem; }
+  .footer-tagline {
+    font-size: clamp(1.5rem, 1rem + 2.6vw, 3.25rem);
+    font-weight: 900;
+    font-stretch: 112%;
+    text-transform: uppercase;
+    line-height: 1;
+    color: $pearl;
+    letter-spacing: -0.02em;
+    span { color: $brand; }
+  }
+}
+
+// Floating WhatsApp + call ------------------------------------------------------
+.fab-stack {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 2rem);
+  bottom: clamp(1rem, 2.5vw, 2rem);
+  z-index: 1040;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.fab {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s var(--smk-ease);
+  &:hover { transform: translateY(-3px) scale(1.05); color: #fff; }
+
+  &--wa {
+    background: #25d366;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid #25d366;
+      animation: fab-ring 2.4s var(--smk-ease) infinite;
+    }
+  }
+  &--call {
+    width: 48px;
+    height: 48px;
+    background: $brand;
+    &:hover { color: #fff; background: $brand-bright; }
+  }
+
+  .fab-label {
+    position: absolute;
+    right: calc(100% + 0.75rem);
+    white-space: nowrap;
+    padding: 0.45rem 0.85rem;
+    border-radius: $border-radius;
+    background: rgba($ink-800, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: $pearl;
+    font-size: 0.78rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: all 0.35s var(--smk-ease);
+    pointer-events: none;
+  }
+  &:hover .fab-label,
+  &:focus-visible .fab-label { opacity: 1; transform: none; }
+}
+
+.social-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: $border-radius;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: $steel-200 !important;
+  transition: all 0.3s;
+  &:hover { background: $brand; border-color: $brand; color: #fff !important; }
+}
+
+@keyframes fab-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+// Toasts ------------------------------------------------------------------------
+.toast-dock {
+  position: fixed;
+  top: calc(var(--smk-nav-h) + 1rem);
+  right: 1rem;
+  left: 1rem;
+  z-index: 1090;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  pointer-events: none;
+  .toast {
+    pointer-events: auto;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border-left: 3px solid $brand;
+    animation: toast-in 0.5s var(--smk-ease);
+    max-width: 100%;
+    &.is-success { border-left-color: $success; }
+    &.is-error { border-left-color: $danger; }
+    .toast-close {
+      border: 0;
+      background: transparent;
+      color: $steel-400;
+      padding: 0.25rem;
+      line-height: 0;
+      border-radius: 50%;
+      &:hover { color: $pearl; background: rgba(255, 255, 255, 0.06); }
+    }
+  }
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+// Error boundary ------------------------------------------------------------------
+.error-fallback {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem;
+}
