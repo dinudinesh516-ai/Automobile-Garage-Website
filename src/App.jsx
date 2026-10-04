@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import BrandStrip from './components/BrandStrip';
 import Services from './components/Services';
 import About from './components/About';
+import Team from './components/Team';
 import Gallery from './components/Gallery';
 import Reviews from './components/Reviews';
 import Contact from './components/Contact';
@@ -27,6 +28,7 @@ export default function App() {
         <Safe><BrandStrip /></Safe>
         <Safe><Services /></Safe>
         <Safe><About /></Safe>
+        <Safe><Team /></Safe>
         <Safe><Gallery /></Safe>
         <Safe><Reviews /></Safe>
         <Safe><Contact /></Safe>

@@ -17,11 +17,15 @@ export const business = {
   phoneHref: 'tel:+919944821516',
   whatsappNumber: '919944821516', // international format, digits only
 
-  /** Direct lines printed on the business card. */
+  /**
+   * The team — direct lines from the business card, plus the roles/photos used
+   * in the "Our team" section (photos live in /public/team). `order` sets the
+   * card order in that section; this array's order is used for contact lists.
+   */
   team: [
-    { name: 'C.A Mansoor', phone: '+91 99448 21516', href: 'tel:+919944821516' },
-    { name: 'S. Stalin', phone: '+91 97914 92071', href: 'tel:+919791492071' },
-    { name: 'S. Kishore', phone: '+91 98945 20347', href: 'tel:+919894520347' },
+    { name: 'C.A Mansoor', shortName: 'Mansoor', role: 'Parts Sourcer', photo: 'mansoor', order: 3, phone: '+91 99448 21516', href: 'tel:+919944821516' },
+    { name: 'S. Stalin', shortName: 'Stalin', role: 'Senior Technician', photo: 'stalin', order: 1, phone: '+91 97914 92071', href: 'tel:+919791492071' },
+    { name: 'S. Kishore', shortName: 'Kishore', role: 'Senior Technician', photo: 'kishore', order: 2, phone: '+91 98945 20347', href: 'tel:+919894520347' },
   ],
 
   instagram: 'https://www.instagram.com/smk__automobiles/',
@@ -218,6 +222,7 @@ export const aboutImage = {
 export const navLinks = [
   { href: '#services', label: 'Services' },
   { href: '#about', label: 'About' },
+  { href: '#team', label: 'Team' },
   { href: '#gallery', label: 'Gallery' },
   { href: '#reviews', label: 'Reviews' },
   { href: '#contact', label: 'Contact' },
