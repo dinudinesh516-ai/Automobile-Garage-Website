@@ -23,9 +23,9 @@ export const business = {
    * card order in that section; this array's order is used for contact lists.
    */
   team: [
-    { name: 'C.A Mansoor', shortName: 'Mansoor', role: 'Parts Sourcer', photo: 'mansoor', order: 3, phone: '+91 99448 21516', href: 'tel:+919944821516' },
+    { name: 'C.A Mansoor', shortName: 'Mansoor', role: 'Parts Sourcer', photo: 'mansoor', order: 2, phone: '+91 99448 21516', href: 'tel:+919944821516' },
     { name: 'S. Stalin', shortName: 'Stalin', role: 'Senior Technician', photo: 'stalin', order: 1, phone: '+91 97914 92071', href: 'tel:+919791492071' },
-    { name: 'S. Kishore', shortName: 'Kishore', role: 'Senior Technician', photo: 'kishore', order: 2, phone: '+91 98945 20347', href: 'tel:+919894520347' },
+    { name: 'S. Kishore', shortName: 'Kishore', role: 'Senior Technician', photo: 'kishore', order: 3, phone: '+91 98945 20347', href: 'tel:+919894520347' },
   ],
 
   instagram: 'https://www.instagram.com/smk__automobiles/',
