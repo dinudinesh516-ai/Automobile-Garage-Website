@@ -9,12 +9,13 @@ const FALLBACK = {
 };
 
 /**
- * Loads live Google reviews from /api/reviews. While loading, `loading` is
- * true; on any failure (no API key, network, quota) it quietly falls back to
- * the bundled reviews in business.js so the section never looks broken.
+ * Loads live Google reviews from /api/reviews. The bundled reviews in
+ * business.js render first (so they are in the pre-rendered HTML that search
+ * engines read) and are swapped for the live ones when they arrive. On any
+ * failure (no API key, network, quota) the bundled reviews simply stay.
  */
 export default function useGoogleReviews(limit = 3) {
-  const [state, setState] = useState({ ...FALLBACK, loading: true });
+  const [state, setState] = useState({ ...FALLBACK, loading: false });
 
   useEffect(() => {
     const controller = new AbortController();

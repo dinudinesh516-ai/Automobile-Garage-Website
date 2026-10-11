@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { business, serviceOptions } from '../data/business';
 import { bookingToWhatsapp } from '../utils/whatsapp';
 import { useToast } from './ToastProvider';
@@ -35,6 +35,9 @@ export default function BookingForm() {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [sentLink, setSentLink] = useState(null); // set after a successful hand-off
+  // Set after mount: the pre-rendered HTML is built on a different day than it's viewed
+  const [minDate, setMinDate] = useState(undefined);
+  useEffect(() => setMinDate(todayISO()), []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -142,7 +145,7 @@ export default function BookingForm() {
 
         <div className="col-md-6">
           <label htmlFor="bf-date" className="form-label">Preferred date</label>
-          <input id="bf-date" name="date" type="date" min={todayISO()} className={fieldClass('date')}
+          <input id="bf-date" name="date" type="date" min={minDate} className={fieldClass('date')}
             value={values.date} onChange={onChange} onBlur={onBlur} required
             aria-invalid={Boolean(touched.date && errors.date)} aria-describedby="bf-date-err" />
           <div className="invalid-feedback" id="bf-date-err">{errors.date}</div>

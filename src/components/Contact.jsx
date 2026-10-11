@@ -11,7 +11,7 @@ import Icon from './Icon';
 const rowIsToday = (row, today) => (today === 0 ? row.days.startsWith('Sun') : !row.days.startsWith('Sun'));
 
 export default function Contact() {
-  const { isOpen, today } = useOpenStatus();
+  const { ready, isOpen, today } = useOpenStatus();
   const { address } = business;
 
   return (
@@ -81,7 +81,9 @@ export default function Contact() {
                 <div className="flex-grow-1">
                   <div className="d-flex justify-content-between align-items-center">
                     <span className="lbl">Hours</span>
-                    <span className={`open-badge ${isOpen ? 'is-open' : 'is-closed'}`}>{isOpen ? 'Open now' : 'Closed'}</span>
+                    {ready && (
+                      <span className={`open-badge ${isOpen ? 'is-open' : 'is-closed'}`}>{isOpen ? 'Open now' : 'Closed'}</span>
+                    )}
                   </div>
                   <table className="hours-table mt-1">
                     <tbody>

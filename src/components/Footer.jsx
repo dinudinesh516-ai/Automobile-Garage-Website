@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
 
           <div className="col-6 col-lg-2">
-            <h5>Explore</h5>
+            <h2 className="footer-heading">Explore</h2>
             <ul className="list-unstyled d-grid gap-2 mb-0">
               {navLinks.map((l) => (
                 <li key={l.href}><a href={l.href}>{l.label}</a></li>
@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
 
           <div className="col-6 col-lg-3">
-            <h5>Services</h5>
+            <h2 className="footer-heading">Services</h2>
             <ul className="list-unstyled d-grid gap-2 mb-0">
               {services.slice(0, 6).map((s) => (
                 <li key={s.title}><a href="#services">{s.title}</a></li>
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           <div className="col-12 col-lg-3">
-            <h5>Visit</h5>
+            <h2 className="footer-heading">Visit</h2>
             <address className="fst-normal mb-3">
               {address.line1}, {address.line2},<br />
               {address.city} – {address.pin}
@@ -75,7 +75,8 @@ export default function Footer() {
 
         <hr className="brand-rule my-4" />
         <div className="d-flex flex-column flex-md-row justify-content-between gap-2 small">
-          <span>© {year} {business.fullName}. All rights reserved.</span>
+          {/* Year can differ between build time and viewing time */}
+          <span suppressHydrationWarning>© {year} {business.fullName}. All rights reserved.</span>
           <span>{business.city}, Tamil Nadu</span>
         </div>
       </div>

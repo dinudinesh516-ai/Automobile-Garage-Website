@@ -87,7 +87,7 @@ h4, h5, h6 {
   font-weight: 800;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: $brand-bright;
+  color: $brand-on-dark;
   &::before {
     content: '';
     width: 1.75rem;
@@ -113,7 +113,7 @@ h4, h5, h6 {
   max-width: 38rem;
 }
 
-.text-brand { color: $brand !important; }
+.text-brand { color: $brand-on-dark !important; } // on dark; card red is used in .section-light
 .text-pearl { color: $pearl !important; }
 .text-steel { color: $steel-400 !important; }
 
@@ -227,6 +227,8 @@ input[type='date'] { color-scheme: dark; }
   h3,
   h4 { color: $paper-strong; }
   .lead-muted { color: $paper-text; }
+  .eyebrow { color: $brand; }
+  .text-brand { color: $brand !important; }
   .text-pearl { color: $paper-strong !important; }
   .text-steel { color: $paper-text !important; }
 

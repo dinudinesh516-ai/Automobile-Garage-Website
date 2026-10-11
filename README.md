@@ -32,11 +32,20 @@ src/
   hooks/                useGoogleReviews, useOpenStatus, useScrolled, useActiveSection
   utils/whatsapp.js     wa.me link builders + message templates
   styles/               _variables.scss (theme tokens) · _base.scss · _components.scss
+  entry-server.jsx      build-time render of the page (for pre-rendering)
+scripts/prerender.mjs   injects pre-rendered HTML, site URL, sitemap.xml, robots.txt
 vite.config.js          also serves /api/* on the dev server
 vercel.json             build config + cache/security headers
 ```
 
 To change business details, edit **`src/data/business.js`** only.
+
+## SEO
+
+- `npm run build` **pre-renders** the whole page into `dist/index.html`. Google, Bing and WhatsApp/Facebook link previews read the full content without running JavaScript. React then takes over in the browser.
+- The canonical URL, Open Graph image and JSON-LD use the live domain. It's filled in automatically from Vercel's production domain (`VERCEL_PROJECT_PRODUCTION_URL`), or from `SITE_URL` if you set it. **After adding a custom domain, redeploy** so the canonical URL and sitemap pick it up.
+- `sitemap.xml` and `robots.txt` are generated at build time.
+- The share image is `public/og-image.jpg` (1200×630).
 
 ## Local development
 

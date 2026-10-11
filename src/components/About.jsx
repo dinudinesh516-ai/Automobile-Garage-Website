@@ -51,7 +51,7 @@ export default function About() {
                 <Reveal className="pillar" key={p.title} delay={i * 80}>
                   <span className="pillar-num">{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <h4>{p.title}</h4>
+                    <h3 className="pillar-title">{p.title}</h3>
                     <p>{p.text}</p>
                   </div>
                 </Reveal>

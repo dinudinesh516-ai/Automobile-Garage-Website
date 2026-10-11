@@ -8,7 +8,7 @@ import Icon from './Icon';
  * is eagerly loaded with fetchpriority="high" and a responsive srcset.
  */
 export default function Hero() {
-  const { isOpen, closesAt, opensAt } = useOpenStatus();
+  const { ready, isOpen, closesAt, opensAt } = useOpenStatus();
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
@@ -45,9 +45,14 @@ export default function Hero() {
                 </span>
                 <span>{business.rating.count}+ Google reviews</span>
               </span>
-              <span className={`open-badge ${isOpen ? 'is-open' : 'is-closed'}`}>
-                {isOpen ? `Open now · till ${closesAt}` : `Closed now · opens ${opensAt}`}
-              </span>
+              {/* Live status needs the current time, so the pre-rendered HTML shows the hours instead */}
+              {ready ? (
+                <span className={`open-badge ${isOpen ? 'is-open' : 'is-closed'}`}>
+                  {isOpen ? `Open now · till ${closesAt}` : `Closed now · opens ${opensAt}`}
+                </span>
+              ) : (
+                <span className="open-badge is-pending">Mon – Sat · 9 AM – 10 PM</span>
+              )}
             </div>
 
             <h1 className="hero__title" id="hero-title">

@@ -1,42 +1,65 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SMK Automobiles | Multi-Brand Car Service Centre, Coimbatore</title>
+    <!-- __SITE_URL__ is replaced with the live domain at build time (scripts/prerender.mjs) -->
+    <title>SMK Automobiles | Multi-Brand Car Service &amp; Repair in Coimbatore</title>
     <meta
       name="description"
-      content="SMK Automobiles — 5.0★ multi-brand car service centre in Sundakkamuthur, Coimbatore. Periodic service, AC repair, body &amp; painting, accident repairs, breakdown assistance and pickup &amp; drop."
+      content="5.0★ rated multi-brand car service &amp; repair in Sundakkamuthur, Coimbatore — general service, AC, denting &amp; painting and accident repairs. Book on WhatsApp."
     />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="__SITE_URL__/" />
     <meta name="theme-color" content="#0b0b0c" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Open Graph -->
+    <!-- Local SEO -->
+    <meta name="geo.region" content="IN-TN" />
+    <meta name="geo.placename" content="Coimbatore" />
+    <meta name="geo.position" content="10.956571;76.9264956" />
+    <meta name="ICBM" content="10.956571, 76.9264956" />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn link previews) -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SMK Automobiles" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="__SITE_URL__/" />
     <meta property="og:title" content="SMK Automobiles — Multi-Brand Car Service, Coimbatore" />
     <meta
       property="og:description"
-      content="All kinds of car repairing done here. Rated 5.0★ by 124+ customers — book on WhatsApp."
+      content="All kinds of car repairing done here. Rated 5.0★ on Google — book on WhatsApp."
     />
+    <meta property="og:image" content="__SITE_URL__/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SMK Automobiles — all kinds of car repairs, Sundakkamuthur, Coimbatore" />
 
-    <!-- Fonts: preconnect + display=swap keeps them off the critical path -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap"
-    />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SMK Automobiles — Multi-Brand Car Service, Coimbatore" />
+    <meta name="twitter:description" content="All kinds of car repairing done here. Rated 5.0★ on Google — book on WhatsApp." />
+    <meta name="twitter:image" content="__SITE_URL__/og-image.jpg" />
+
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1633867179970-c54688bcfa33?auto=format&fit=crop&w=1600&q=70" imagesrcset="https://images.unsplash.com/photo-1633867179970-c54688bcfa33?auto=format&fit=crop&w=800&q=70 800w, https://images.unsplash.com/photo-1633867179970-c54688bcfa33?auto=format&fit=crop&w=1200&q=70 1200w, https://images.unsplash.com/photo-1633867179970-c54688bcfa33?auto=format&fit=crop&w=1600&q=70 1600w, https://images.unsplash.com/photo-1633867179970-c54688bcfa33?auto=format&fit=crop&w=2400&q=70 2400w" imagesizes="100vw" fetchpriority="high" />
 
-    <!-- Local SEO structured data -->
+    <!-- Local business structured data (Google Search / Maps) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "AutoRepair",
+        "@id": "__SITE_URL__/#business",
         "name": "SMK Automobiles - Multi Brand Car Service Center",
+        "alternateName": "SMK Automobiles",
+        "description": "Multi-brand car service and repair centre in Sundakkamuthur, Coimbatore — general and periodic service, car AC repair, denting and painting, accident repairs, brakes, exhaust, breakdown assistance and pickup & drop.",
+        "url": "__SITE_URL__/",
+        "logo": "__SITE_URL__/apple-touch-icon.png",
+        "image": "__SITE_URL__/og-image.jpg",
         "telephone": "+91-9944821516",
-        "logo": "/favicon.svg",
+        "priceRange": "₹₹",
+        "currenciesAccepted": "INR",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Kasinath Garden, near Thangam Building, Sundakkamuthur",
@@ -46,19 +69,33 @@
           "addressCountry": "IN"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 10.956571, "longitude": 76.9264956 },
+        "areaServed": { "@type": "City", "name": "Coimbatore" },
         "hasMap": "https://www.google.com/maps/search/?api=1&query=SMK%20Automobiles&query_place_id=ChIJ14jcSqpbqDsRzL-THQhBOOE",
-        "openingHoursSpecification": [{
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "09:00", "closes": "22:00"
-        }],
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "124" },
-        "sameAs": ["https://www.instagram.com/smk__automobiles/"]
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "22:00"
+          }
+        ],
+        "contactPoint": [
+          { "@type": "ContactPoint", "telephone": "+91-9944821516", "contactType": "customer service", "areaServed": "IN" },
+          { "@type": "ContactPoint", "telephone": "+91-9791492071", "contactType": "customer service", "areaServed": "IN" },
+          { "@type": "ContactPoint", "telephone": "+91-9894520347", "contactType": "customer service", "areaServed": "IN" }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/smk__automobiles/",
+          "https://www.google.com/maps/search/?api=1&query=SMK%20Automobiles&query_place_id=ChIJ14jcSqpbqDsRzL-THQhBOOE"
+        ]
       }
     </script>
   </head>
   <body>
-    <noscript>Please enable JavaScript, or call us on +91 99448 21516.</noscript>
+    <noscript>
+      <!-- Without JS the scroll-reveal never fires; keep content visible -->
+      <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

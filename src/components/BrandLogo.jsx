@@ -92,7 +92,7 @@ export default function BrandLogo({ variant = 'full', className = '', title = 'S
           x="20"
           y="592"
           fill={RED}
-          fontFamily="Archivo, 'Arial Black', Arial, sans-serif"
+          fontFamily="'Archivo Variable', Archivo, 'Arial Black', Arial, sans-serif"
           fontWeight="700"
           fontSize="104"
           textLength="1090"

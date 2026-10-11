@@ -137,7 +137,7 @@
         letter-spacing: -0.01em;
         padding: 0.35rem 0 !important;
         &::after { display: none; }
-        &.active { color: $brand-bright; }
+        &.active { color: $brand-on-dark; }
       }
     }
   }
@@ -163,7 +163,7 @@
       object-fit: cover;
       object-position: 60% 55%;
       transform: scale(1.06);
-      animation: hero-zoom 18s var(--smk-ease) forwards;
+      animation: hero-zoom 2.5s var(--smk-ease) forwards;
       filter: saturate(0.8) contrast(1.08) brightness(0.9);
     }
   }
@@ -528,7 +528,7 @@
     line-height: 1.5;
     min-width: 2rem;
   }
-  h4 { font-size: 1rem; margin-bottom: 0.25rem; color: $pearl; }
+  .pillar-title { font-size: 1rem; font-weight: 700; font-stretch: 100%; letter-spacing: -0.005em; margin-bottom: 0.25rem; color: $pearl; }
   p { margin: 0; color: $steel-400; font-size: 0.92rem; }
 }
 
@@ -780,7 +780,7 @@
     color: $steel-400;
   }
   a, .val { color: $pearl; font-weight: 600; }
-  a:hover { color: $brand-bright; }
+  a:hover { color: $brand-on-dark; }
 }
 
 .team-list {
@@ -803,7 +803,7 @@
   font-size: 0.9rem;
   td { padding: 0.2rem 0; }
   td:last-child { text-align: right; color: $pearl; }
-  tr.is-today td { color: $brand-bright; font-weight: 700; }
+  tr.is-today td { color: $brand-on-dark; font-weight: 700; }
 }
 
 .map-frame {
@@ -845,7 +845,7 @@
   font-size: 0.9rem;
   color: $steel-400;
   overflow: hidden;
-  h5 {
+  .footer-heading {
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.2em;
@@ -853,7 +853,7 @@
     color: $pearl;
     margin-bottom: 1.25rem;
   }
-  a { color: $steel-400; &:hover { color: $brand-bright; } }
+  a { color: $steel-400; &:hover { color: $brand-on-dark; } }
   .footer-logo { height: 64px; margin-bottom: 1.25rem; }
   .footer-tagline {
     font-size: clamp(1.5rem, 1rem + 2.6vw, 3.25rem);

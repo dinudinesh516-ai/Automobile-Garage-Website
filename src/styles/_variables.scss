@@ -23,6 +23,7 @@ $paper-strong: #0b0b0c;
 // Brand red (sampled from the card)
 $brand: #c61e26;
 $brand-bright: #e3323b;
+$brand-on-dark: #ff4d55; // small red text on black — passes WCAG AA (6.2:1); card red is 3.5:1 there
 $brand-deep: #9b1219;
 $brand-soft: rgba($brand, 0.12);
 
@@ -40,12 +41,12 @@ $body-secondary-color: $steel-400;
 $body-emphasis-color: $pearl;
 $headings-color: $pearl;
 $border-color: $ink-700;
-$link-color: $brand-bright;
-$link-hover-color: lighten($brand-bright, 8%);
+$link-color: $brand-on-dark;
+$link-hover-color: lighten($brand-on-dark, 8%);
 $link-decoration: none;
 
 // Typography — Archivo (variable width + weight) echoes the logo's heavy grotesque
-$font-family-sans-serif: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+$font-family-sans-serif: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 $font-family-display: $font-family-sans-serif;
 $headings-font-family: $font-family-display;
 $headings-font-weight: 800;

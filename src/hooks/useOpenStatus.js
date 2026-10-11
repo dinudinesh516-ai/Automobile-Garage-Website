@@ -54,11 +54,19 @@ function compute() {
   };
 }
 
+/**
+ * Neutral state used for the pre-rendered HTML and the first client render.
+ * The live status depends on the current time, so it is only computed after
+ * mount — otherwise the build-time HTML would disagree with the browser.
+ */
+const UNKNOWN = { ready: false, isOpen: false, today: -1, closesAt: null, opensAt: null };
+
 export default function useOpenStatus() {
-  const [status, setStatus] = useState(compute);
+  const [status, setStatus] = useState(UNKNOWN);
 
   useEffect(() => {
-    const id = setInterval(() => setStatus(compute()), 60_000);
+    setStatus({ ready: true, ...compute() });
+    const id = setInterval(() => setStatus({ ready: true, ...compute() }), 60_000);
     return () => clearInterval(id);
   }, []);
 
