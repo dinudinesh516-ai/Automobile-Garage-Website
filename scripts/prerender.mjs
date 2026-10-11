@@ -5,26 +5,22 @@
  *  2. Replaces the __SITE_URL__ placeholders (canonical, Open Graph, JSON-LD).
  *  3. Writes dist/sitemap.xml and dist/robots.txt.
  *
- * Site URL: SITE_URL env var if set, otherwise Vercel's production domain
- * (VERCEL_PROJECT_PRODUCTION_URL — your custom domain once one is added).
+ * Site URL: SITE_URL env var if set, otherwise the primary production domain
+ * below. Must be the domain that does NOT redirect — smkautomobiles.in
+ * redirects to www, so www is canonical. (Vercel's VERCEL_PROJECT_PRODUCTION_URL
+ * isn't used: it picks the shortest domain, i.e. the redirecting one.)
  */
 import { readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
+const PRIMARY_DOMAIN = 'https://www.smkautomobiles.in';
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, 'dist');
 const serverDir = resolve(root, 'dist-server');
 
-const siteUrl = (
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
-  'http://localhost:4173'
-).replace(/\/+$/, '');
-
-if (siteUrl.includes('localhost')) {
-  console.warn('[prerender] No SITE_URL / Vercel domain found — using', siteUrl, '(fine for local testing).');
-}
+const siteUrl = (process.env.SITE_URL || PRIMARY_DOMAIN).replace(/\/+$/, '');
 
 // 1. Render the app
 const { render } = await import(pathToFileURL(resolve(serverDir, 'entry-server.js')).href);

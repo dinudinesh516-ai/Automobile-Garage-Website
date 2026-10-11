@@ -43,7 +43,7 @@ To change business details, edit **`src/data/business.js`** only.
 ## SEO
 
 - `npm run build` **pre-renders** the whole page into `dist/index.html`. Google, Bing and WhatsApp/Facebook link previews read the full content without running JavaScript. React then takes over in the browser.
-- The canonical URL, Open Graph image and JSON-LD use the live domain. It's filled in automatically from Vercel's production domain (`VERCEL_PROJECT_PRODUCTION_URL`), or from `SITE_URL` if you set it. **After adding a custom domain, redeploy** so the canonical URL and sitemap pick it up.
+- The canonical URL, Open Graph image, JSON-LD and sitemap use **https://www.smkautomobiles.in**, set as `PRIMARY_DOMAIN` in `scripts/prerender.mjs`. It must be the domain that does not redirect (the bare `smkautomobiles.in` redirects to `www`). If the domain ever changes, edit that line, or set a `SITE_URL` environment variable in Vercel.
 - `sitemap.xml` and `robots.txt` are generated at build time.
 - The share image is `public/og-image.jpg` (1200×630).
 
