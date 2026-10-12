@@ -31,7 +31,7 @@ export const business = {
   instagram: 'https://www.instagram.com/smk__automobiles/',
 
   address: {
-    line1: 'Kasinath Garden, near Thangam Building',
+    line1: 'Kasinath Garden, near to Thadagam Building', // matches Google Business Profile exactly
     line2: 'Sundakkamuthur',
     city: 'Coimbatore',
     state: 'Tamil Nadu',

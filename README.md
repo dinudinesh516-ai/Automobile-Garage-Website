@@ -94,6 +94,5 @@ Then go to vercel.com/new, import the repo (Vite is detected automatically), opt
 ## Before launch
 
 - [ ] Swap the Unsplash photos for real photos of the workshop at work (`gallery`, `heroImage` and `aboutImage` in `business.js`).
-- [ ] Confirm the landmark spelling: the card says **"Thangam Building"**, while Google Maps says "Thadagam Building".
 - [ ] Confirm the WhatsApp number (`whatsappNumber`). It currently uses C.A Mansoor's number, 99448 21516.
 - [ ] If you have the original logo file (SVG/AI/PDF), it can replace the recreated SVG in `BrandLogo.jsx`.
